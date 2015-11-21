@@ -1,11 +1,24 @@
 import wx 
 
+
+def load(event):
+	file =open(filename.GetValue())
+	contents.SetValue(file.read())
+	file.close()
+def save(event):
+	file =open(filename.GetValue(), 'w')
+	file.write(contents.GetValue())
+	file.close()
+
+
 if __name__ == '__main__':
     app = wx.App()
     win = wx.Frame(None, title = 'show', size = (410,335))
     bkg = wx.Panel(win)
     loadButton = wx.Button(bkg, label = 'Open')
+    loadButton.Bind(wx.EVT_BUTTON, load)
     saveButton = wx.Button(bkg, label = 'Save')
+    saveButton.Bind(wx.EVT_BUTTON, save)
     filename = wx.TextCtrl(bkg)
     contents = wx.TextCtrl(bkg, style = wx.TE_MULTILINE| wx.HSCROLL)
     hbox = wx.BoxSizer()

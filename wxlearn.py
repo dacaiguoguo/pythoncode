@@ -13,8 +13,7 @@ def save(event):
     file =open(filename.GetValue(), 'w')
     base64string = encodestring(contents.GetValue())
     print base64string
-    file.write(contents.GetValue())
-    file.close()
+    contents.SetValue(base64string)
 
 
 if __name__ == '__main__':

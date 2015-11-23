@@ -4,11 +4,12 @@
 import wx 
 from base64 import encodestring
 import json
+import hashlib   
 
 def load(event):
-    file =open(filename.GetValue())
-    contents.SetValue(file.read())
-    file.close()
+    m2 = hashlib.md5()   
+    m2.update(contents.GetValue().encode('utf-8'))   
+    print m2.hexdigest()   
 def base64fun(event):
     base64string = encodestring(contents.GetValue().encode('utf-8'))
     print base64string

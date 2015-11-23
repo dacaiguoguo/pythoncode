@@ -1,14 +1,20 @@
+#!usr/bin/env python
+# -*- coding: utf-8 -*-
+# hanhan load
 import wx 
+from base64 import encodestring
 
 
 def load(event):
-	file =open(filename.GetValue())
-	contents.SetValue(file.read())
-	file.close()
+    file =open(filename.GetValue())
+    contents.SetValue(file.read())
+    file.close()
 def save(event):
-	file =open(filename.GetValue(), 'w')
-	file.write(contents.GetValue())
-	file.close()
+    file =open(filename.GetValue(), 'w')
+    base64string = encodestring(contents.GetValue())
+    print base64string
+    file.write(contents.GetValue())
+    file.close()
 
 
 if __name__ == '__main__':

@@ -9,8 +9,8 @@ def load(event):
     file =open(filename.GetValue())
     contents.SetValue(file.read())
     file.close()
-def save(event):
-    base64string = encodestring(contents.GetValue())
+def base64fun(event):
+    base64string = encodestring(contents.GetValue().encode('utf-8'))
     print base64string
     contents.SetValue(base64string)
 def jsonfom(event):
@@ -25,14 +25,15 @@ if __name__ == '__main__':
     bkg = wx.Panel(win)
     loadButton = wx.Button(bkg, label = 'Open')
     loadButton.Bind(wx.EVT_BUTTON, load)
-    saveButton = wx.Button(bkg, label = 'Save')
-    saveButton.Bind(wx.EVT_BUTTON, jsonfom)
-    filename = wx.TextCtrl(bkg)
+    base64Button = wx.Button(bkg, label = 'base64')
+    base64Button.Bind(wx.EVT_BUTTON, base64fun)
+    jsonButton = wx.Button(bkg, label = 'json')
+    jsonButton.Bind(wx.EVT_BUTTON, jsonfom)
     contents = wx.TextCtrl(bkg, style = wx.TE_MULTILINE| wx.HSCROLL)
     hbox = wx.BoxSizer()
-    hbox.Add(filename, proportion = 1, flag = wx.EXPAND)
-    hbox.Add(loadButton, proportion = 0, flag = wx.LEFT, border = 5)
-    hbox.Add(saveButton, proportion = 0, flag = wx.LEFT, border = 5)
+    hbox.Add(loadButton, proportion = 1, flag = wx.LEFT, border = 5)
+    hbox.Add(base64Button, proportion = 1, flag = wx.LEFT, border = 5)
+    hbox.Add(jsonButton, proportion = 1, flag = wx.LEFT, border = 5)
     vbox= wx.BoxSizer(wx.VERTICAL)
     vbox.Add(hbox, proportion = 0, flag = wx.EXPAND| wx.ALL, border = 5)
     vbox.Add(contents, proportion = 1, flag = wx.EXPAND| wx.LEFT| wx.BOTTOM|wx.RIGHT, border = 5)

@@ -29,7 +29,7 @@ if __name__ == '__main__':
     base64Button.Bind(wx.EVT_BUTTON, base64fun)
     jsonButton = wx.Button(bkg, label = 'json')
     jsonButton.Bind(wx.EVT_BUTTON, jsonfom)
-    contents = wx.TextCtrl(bkg, style = wx.TE_MULTILINE| wx.HSCROLL)
+    contents = wx.TextCtrl(bkg, style = wx.TE_WORDWRAP| wx.HSCROLL, validator=wx.DefaultValidator)
     hbox = wx.BoxSizer()
     hbox.Add(loadButton, proportion = 1, flag = wx.LEFT, border = 5)
     hbox.Add(base64Button, proportion = 1, flag = wx.LEFT, border = 5)

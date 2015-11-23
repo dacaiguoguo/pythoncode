@@ -3,18 +3,21 @@
 # hanhan load
 import wx 
 from base64 import encodestring
-
+import json
 
 def load(event):
     file =open(filename.GetValue())
     contents.SetValue(file.read())
     file.close()
 def save(event):
-    file =open(filename.GetValue(), 'w')
     base64string = encodestring(contents.GetValue())
     print base64string
     contents.SetValue(base64string)
-
+def jsonfom(event):
+    contentstext = contents.GetValue()
+    dic = json.loads(contentstext)
+    jsonfomdstring = json.dumps(dic, indent=4, ensure_ascii=False)   
+    contents.SetValue(jsonfomdstring)
 
 if __name__ == '__main__':
     app = wx.App()
@@ -23,7 +26,7 @@ if __name__ == '__main__':
     loadButton = wx.Button(bkg, label = 'Open')
     loadButton.Bind(wx.EVT_BUTTON, load)
     saveButton = wx.Button(bkg, label = 'Save')
-    saveButton.Bind(wx.EVT_BUTTON, save)
+    saveButton.Bind(wx.EVT_BUTTON, jsonfom)
     filename = wx.TextCtrl(bkg)
     contents = wx.TextCtrl(bkg, style = wx.TE_MULTILINE| wx.HSCROLL)
     hbox = wx.BoxSizer()

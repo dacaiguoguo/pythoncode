@@ -5,11 +5,13 @@ import wx
 from base64 import encodestring
 import json
 import hashlib   
+import re
+
 
 def load(event):
     m2 = hashlib.md5()   
     m2.update(contents.GetValue().encode('utf-8'))   
-    contents.SetValue(jsonfomdstring)
+    contents.SetValue(m2.hexdigest())
 def base64fun(event):
     base64string = encodestring(contents.GetValue().encode('utf-8'))
     print base64string
@@ -20,6 +22,12 @@ def jsonfom(event):
     jsonfomdstring = json.dumps(dic, indent=4, ensure_ascii=False)   
     contents.SetValue(jsonfomdstring)
 
+def jsonre(event):
+    contentstext = contents.GetValue()
+    strinfo = re.compile(r'"')
+    jsonfomdstring = strinfo.sub(r'\"',contentstext) 
+    contents.SetValue(jsonfomdstring)
+
 if __name__ == '__main__':
     app = wx.App()
     win = wx.Frame(None, title = 'show', size = (410,335))
@@ -28,8 +36,10 @@ if __name__ == '__main__':
     loadButton.Bind(wx.EVT_BUTTON, load)
     base64Button = wx.Button(bkg, label = 'base64')
     base64Button.Bind(wx.EVT_BUTTON, base64fun)
-    jsonButton = wx.Button(bkg, label = 'json')
+    jsonButton = wx.Button(bkg, label = 'json格式化')
     jsonButton.Bind(wx.EVT_BUTTON, jsonfom)
+    jsonReButton = wx.Button(bkg, label = 'json转义')
+    jsonReButton.Bind(wx.EVT_BUTTON, jsonre)
     contents = wx.TextCtrl(bkg, style = wx.TE_WORDWRAP| wx.HSCROLL, validator=wx.DefaultValidator)
     hbox = wx.BoxSizer()
     hbox.Add(loadButton, proportion = 1, flag = wx.LEFT, border = 5)

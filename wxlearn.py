@@ -9,7 +9,7 @@ import hashlib
 def load(event):
     m2 = hashlib.md5()   
     m2.update(contents.GetValue().encode('utf-8'))   
-    print m2.hexdigest()   
+    contents.SetValue(jsonfomdstring)
 def base64fun(event):
     base64string = encodestring(contents.GetValue().encode('utf-8'))
     print base64string
@@ -24,7 +24,7 @@ if __name__ == '__main__':
     app = wx.App()
     win = wx.Frame(None, title = 'show', size = (410,335))
     bkg = wx.Panel(win)
-    loadButton = wx.Button(bkg, label = 'Open')
+    loadButton = wx.Button(bkg, label = 'md5')
     loadButton.Bind(wx.EVT_BUTTON, load)
     base64Button = wx.Button(bkg, label = 'base64')
     base64Button.Bind(wx.EVT_BUTTON, base64fun)
@@ -41,3 +41,5 @@ if __name__ == '__main__':
     bkg.SetSizer(vbox)
     win.Show()
     app.MainLoop()
+
+    

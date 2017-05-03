@@ -20,23 +20,24 @@ for panelDiv in soup.find_all("div"):
     for panelHeadingDiv in panelDiv.find_all("div"):
       panelHeadingClass = panelHeadingDiv["class"][0]
       if panelHeadingClass == "panel-heading":
-        oneTodoList = []
+        oneTodo = {}
+        todoItems = []
         for todoItemDiv in panelDiv.find_all("div"):
           todoItemClass = todoItemDiv["class"][0]
-          oneTodo = {}
           if todoItemClass == "todo-item":
             oneTodo["space"] = (panelHeadingDiv.find_all("a")[0]).text.replace("\n", "").replace(" ", "")
+            oneTodoSub = {}
             indexOfA = 0
             for title in todoItemDiv.find_all("a"):
               if indexOfA ==  0:
-                oneTodo["name"] = title.text.replace("\n", "").replace(" ", "")
+                oneTodoSub["name"] = title.text.replace("\n", "").replace(" ", "")
               if indexOfA ==  1:
-                oneTodo["merge"] = title.text.replace("\n", "").replace(" ", "")
+                oneTodoSub["merge"] = title.text.replace("\n", "").replace(" ", "")
               if indexOfA ==  2:
-                oneTodo["status"] = title.text.replace("\n", "").replace(" ", "")
-                oneTodoList.append(oneTodo)
-                oneTodo = {}
+                oneTodoSub["status"] = title.text.replace("\n", "").replace(" ", "")
+                todoItems.append(oneTodoSub)
               indexOfA = indexOfA + 1
-    allTodo.append(oneTodoList)        
+            oneTodo["items"] = todoItems
+    allTodo.append(oneTodo)        
 jsondump = json.dumps(allTodo)
 print jsondump

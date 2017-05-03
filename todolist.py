@@ -40,6 +40,6 @@ for panelDiv in soup.find_all("div"):
                                 todoItems.append(oneTodoSub)
                             indexOfA = indexOfA + 1
                         oneTodo["items"] = todoItems
-        allTodo.append(oneTodo)                
+        allTodo.append(oneTodo)
 jsondump = json.dumps(allTodo)
 print jsondump

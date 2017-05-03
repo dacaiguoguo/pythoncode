@@ -14,12 +14,12 @@ def load(event):
     contents.SetValue(m2.hexdigest())
 def base64fun(event):
     base64string = encodestring(contents.GetValue().encode('utf-8'))
-    print base64string
     contents.SetValue(base64string)
 def jsonfom(event):
     contentstext = contents.GetValue()
     dic = json.loads(contentstext)
-    jsonfomdstring = json.dumps(dic, indent=4, ensure_ascii=False)   
+    jsonfomdstring = json.dumps(dic)   
+    print repr(jsonfomdstring)
     contents.SetValue(jsonfomdstring)
 
 def jsonre(event):
@@ -36,15 +36,16 @@ if __name__ == '__main__':
     loadButton.Bind(wx.EVT_BUTTON, load)
     base64Button = wx.Button(bkg, label = 'base64')
     base64Button.Bind(wx.EVT_BUTTON, base64fun)
-    jsonButton = wx.Button(bkg, label = 'json格式化')
+    jsonButton = wx.Button(bkg, label = 'jsonfrommat')
     jsonButton.Bind(wx.EVT_BUTTON, jsonfom)
-    jsonReButton = wx.Button(bkg, label = 'json转义')
+    jsonReButton = wx.Button(bkg, label = 'jsonzhuanyi')
     jsonReButton.Bind(wx.EVT_BUTTON, jsonre)
     contents = wx.TextCtrl(bkg, style = wx.TE_WORDWRAP| wx.HSCROLL, validator=wx.DefaultValidator)
     hbox = wx.BoxSizer()
     hbox.Add(loadButton, proportion = 1, flag = wx.LEFT, border = 5)
     hbox.Add(base64Button, proportion = 1, flag = wx.LEFT, border = 5)
     hbox.Add(jsonButton, proportion = 1, flag = wx.LEFT, border = 5)
+    hbox.Add(jsonReButton, proportion = 1, flag = wx.LEFT, border = 5)
     vbox= wx.BoxSizer(wx.VERTICAL)
     vbox.Add(hbox, proportion = 0, flag = wx.EXPAND| wx.ALL, border = 5)
     vbox.Add(contents, proportion = 1, flag = wx.EXPAND| wx.LEFT| wx.BOTTOM|wx.RIGHT, border = 5)

@@ -4,10 +4,11 @@ import requests
 from bs4 import BeautifulSoup
 import json
 
-url="http://lvioscode.com/dashboard/todos?state=&utf8=✓&project_id=&author_id=&type=&action_id="
+url="http://lvioscode.com/dashboard/todos?state=&utf8=✓&project_id=&author_id=&type=&action_id=&private_token=wVbqcqQyWmH7jvgNsmZf"
 cookies={}
-cookies["_gitlab_session"]="b164db7ed4344f78f46bc3a99d00a8b8"
-cookies["issuable_sort"]="id_desc"
+# 可以使用cookie 也可以参数里加private_token 来授权
+# cookies["_gitlab_session"]="b164db7ed4344f78f46bc3a99d00a8b8"
+# cookies["issuable_sort"]="id_desc"
 resp = requests.get(url,cookies=cookies)
 
 html_doc = resp.text
